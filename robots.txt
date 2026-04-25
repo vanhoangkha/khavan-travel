@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cloudsecop.net/sitemap.xml

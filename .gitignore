@@ -8,3 +8,6 @@ nohup.out
 app.log
 data.db
 uploads/
+.env
+photos.json
+.wrangler/

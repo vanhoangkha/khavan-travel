@@ -50,7 +50,16 @@
 <style>
 html{scroll-behavior:smooth}
 *{margin:0;padding:0;box-sizing:border-box}
+/* THEME TOGGLE */
 :root{--bg:#0a0e1a;--surface:#111827;--card:rgba(255,255,255,.05);--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8;--accent:#0ea5e9;--accent2:#f59e0b;--glow:rgba(14,165,233,.15)}
+[data-theme="light"]{--bg:#f8fafc;--surface:#fff;--card:rgba(0,0,0,.03);--border:rgba(0,0,0,.08);--text:#1e293b;--muted:#64748b}
+[data-theme="light"] .hero::before{background:linear-gradient(180deg,rgba(248,250,252,.3) 0%,rgba(248,250,252,.85) 60%,var(--bg) 100%)}
+[data-theme="light"] nav{background:rgba(248,250,252,.9)}
+[data-theme="light"] .brand{color:var(--text)}
+[data-theme="light"] .map-stat .num{color:var(--text)}
+[data-theme="light"] .stat strong{color:var(--text)}
+.theme-toggle{background:none;border:1px solid var(--border);color:var(--muted);padding:.4rem .7rem;border-radius:8px;cursor:pointer;font-size:.8rem;transition:all .2s}
+.theme-toggle:hover{border-color:var(--accent);color:var(--text)}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
 a{color:var(--accent);text-decoration:none}
 img{display:block;width:100%}
@@ -184,9 +193,10 @@ footer a{color:var(--accent)}
     <a href="#about">About</a>
     <a href="#trips">Hành trình</a>
     <a href="#gallery">Ảnh</a>
-    <a href="#reviews">Reviews</a>
+    <a href="/blog/sapa-mua-dong.html">Blog</a>
     <a href="#social">Facebook</a>
     <a href="https://www.linkedin.com/in/vanhoangkha/" target="_blank" class="nav-cta">LinkedIn</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Đổi theme">dark/light</button>
   </div>
 </nav>
 
@@ -540,6 +550,24 @@ footer a{color:var(--accent)}
   </div>
 </section>
 
+<!-- BLOG -->
+<section id="blog">
+  <div class="container" style="max-width:700px">
+    <div class="section-header fade-up">
+      <h2>Viết lặt vặt</h2>
+      <p>Mấy bài ngắn, kinh nghiệm thật</p>
+    </div>
+    <a href="/blog/sapa-mua-dong.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;color:var(--text);transition:border-color .2s">
+      <h3 style="font-size:1.1rem;margin-bottom:.3rem">Sapa mùa đông đi có lạnh không</h3>
+      <p style="color:var(--muted);font-size:.9rem;margin:0">Tháng 12, 2 độ C, mặc gì, ở đâu, ăn gì.</p>
+    </a>
+    <a href="/blog/an-do-mang-gi.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;color:var(--text);transition:border-color .2s">
+      <h3 style="font-size:1.1rem;margin-bottom:.3rem">Mấy thứ mang theo khi đi Ấn Độ</h3>
+      <p style="color:var(--muted);font-size:.9rem;margin:0">7 ngày Delhi-Jaipur-Varanasi-Agra, cần gì và thừa gì.</p>
+    </a>
+  </div>
+</section>
+
 <!-- CTA -->
 <section>
   <div class="cta-box">
@@ -622,6 +650,21 @@ document.addEventListener('keydown',e=>{
 
 /* Close mobile nav on link click */
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open')));
+
+/* Theme toggle */
+function toggleTheme(){
+  const t=document.documentElement.dataset.theme==='light'?'dark':'light';
+  document.documentElement.dataset.theme=t;
+  localStorage.setItem('theme',t);
+  document.querySelector('.theme-toggle').textContent=t==='light'?'dark mode':'light mode';
+}
+(function(){
+  const saved=localStorage.getItem('theme');
+  if(saved){document.documentElement.dataset.theme=saved;
+    const btn=document.querySelector('.theme-toggle');
+    if(btn)btn.textContent=saved==='light'?'dark mode':'light mode';
+  }
+})();
 </script>
 </body>
 </html>
